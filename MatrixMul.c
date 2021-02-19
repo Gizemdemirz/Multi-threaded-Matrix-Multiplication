@@ -22,9 +22,9 @@ void detailMat(int **Matrix,int Row,int Column);
 //Iki matrisin carpimi
 void* mut_matrix(void* arg){
  int Ctemp ;
-//Calisan thread'in belirlenebilmesi icin metot calistiginda part degiskenini 1 arttirip yeni degiskenime atadim.
+//Calisan thread'in belirlenebilmesi icin metot calistiginda part degiskenini 1 arttirip yeni degiskene atadik
  int thread_part  = part++;
-//Her satir islemini bir thread gerceklestirsin diye satir numarami thread numarama esitledim.
+//Her satir islemini bir thread gerceklestirsin diye satir numarasini thread numarasina esitledik.
  for(int i = thread_part;i<row;i++){
    for (int j  = 0 ;j<column;j++){
         Ctemp =0;
@@ -38,23 +38,23 @@ void* mut_matrix(void* arg){
 
 
 int main(int argc,char *argv[]){
-//Komut satirina girilen argumanlar istenilenden az ise ekrana uyari mesaji yazdirdim.
+//Komut satirina girilen argumanlar istenilenden az ise ekrana uyari mesaji yazdirdik.
 if(argc != 4){
    printf("Kullanım: %s <row> <rowCol> <column>\n",argv[0]);
    return 1;
 }
-//Girilen arguman degerleri matris olusumuna engel ise ekrana uyari mesaji yazdirdim.
+//Girilen arguman degerleri matris olusumuna engel ise ekrana uyari mesaji yazdirdik.
 else if(atoi(argv[1]) <1 || atoi(argv[2])<1 || atoi(argv[3])<1){
    printf("Argüman değerleri 1'den küçük olamaz!!\n");
    return 1;
 }
 
-//Girilen arguman degerlerini degiskenlere atadim.
+//Girilen arguman degerlerini degiskenlere atadik.
 row = atoi(argv[1]);
 rowCol = atoi(argv[2]);
 column = atoi(argv[3]);
 
-//Bellekte matrisler icin yer tahsis ettim.
+//Bellekte matrisler icin yer tahsis ettik.
 A = (int **) malloc(sizeof(int*) *row);
 for(int i=0;i<row;i++)
   A[i] = (int*) malloc(sizeof(int)*rowCol);
@@ -77,7 +77,7 @@ randMat(A,row,rowCol);
 randMat(B,rowCol,column);
 
 
-//Kullanicinin belirledigi satir sayisi kadar thread olusturdum
+//Kullanicinin belirledigi satir sayisi kadar thread olusturduk
 pthread_t threads[row];
 
 for(int i = 0;i<row;i++){
@@ -85,12 +85,12 @@ for(int i = 0;i<row;i++){
 //Calisma zamani hesabi icin sureyi baslattim.
   gettimeofday(&time_start,NULL);
 }
-//Olasi sorunlara karsı join ifadesiyle her thread'in birbirini beklemesini sagladim.
+//Olasi sorunlara karsı join ifadesiyle her thread'in birbirini beklemesini sagladik.
 for(int i = 0;i<row;i++){
   pthread_join(threads[i],NULL);
-//Her thread gorevini yaptiktan sonra sureyi bitirdim.
+//Her thread gorevini yaptiktan sonra sureyi bitirdik.
   gettimeofday(&time_end,NULL);
-//Baslangic ve bitis zamanini kullanarak gecen sureyi hesapladim ve yazdirdim.
+//Baslangic ve bitis zamanini kullanarak gecen sureyi hesapladik ve yazdirdik.
   float time =(float) ((1000000*time_end.tv_sec+time_end.tv_usec)-(1000000*time_start.tv_sec+time_start.tv_usec))/1000000;
   printf("%d.thread çalışma süresi= %f\n",i+1,time);
 }
@@ -101,7 +101,7 @@ printf("B matrisi\n");
 printMat(B,rowCol,column);
 detailMat(C,row,column);
 
-//Bellekte ayrilan alanlari serbest biraktim
+//Bellekte ayrilan alanlari serbest biraktik
 for(int i=0;i<row;i++){free(A[i]);free(C[i]);}
 free(A);free(C);
 for(int i=0;i<rowCol;i++){free(B[i]);}
